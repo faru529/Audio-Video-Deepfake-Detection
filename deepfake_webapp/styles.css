@@ -1,0 +1,163 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url("/static/background1.png") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 35px;
+}
+
+.title {
+    font-size: 5rem; 
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+         0 0 10px purple,
+         0 0 20px purple;
+    margin-bottom: 30px;
+}
+
+/* Upload */
+.upload-container {
+    border: 2px dashed white;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 15px;
+    padding: 30px;
+    transition: 0.3s ease;
+}
+
+.upload-container:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.02);
+}
+
+.para {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ddd;
+}
+
+#fileElem {
+    display: none;
+}
+
+#video-preview {
+    width: 100%;
+    max-height: 200px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    animation: fadeScaleIn 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.btn-predict {
+    background-color: rgb(89, 12, 89);
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    padding: 15px 25px;
+    border: none;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+    transition: transform 0.3s ease;
+}
+
+.btn-predict:hover {
+    transform: scale(1.05);
+}
+
+@keyframes fadeScaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+    0%   { box-shadow: 0 0 10px white, 0 0 20px purple; }
+    50%  { box-shadow: 0 0 25px white, 0 0 45px purple; }
+    100% { box-shadow: 0 0 10px white, 0 0 20px purple; }
+}
+
+/* Result Boxes */
+.real-background, .fake-background {
+    padding: 30px 50px;
+    border-radius: 30px;
+    color: white;
+    width: fit-content;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    animation: popFade 0.6s ease-out forwards, glowBox 1.5s infinite alternate;
+    opacity: 0;
+    text-align: center;
+}
+
+.real-flutter, .fake-flutter {
+    font-size: 110px;
+    animation: none;
+    text-shadow: none;
+    margin-bottom: 10px;
+}
+
+.real-background {
+    background: linear-gradient(135deg, #00cc66, #004d33);
+    box-shadow: 0 0 30px rgba(0, 255, 128, 0.5);
+}
+.real-flutter::before {
+    content: "✅ ";
+}
+
+.fake-background {
+    background: linear-gradient(135deg, #ff0033, #4d0000);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+}
+.fake-flutter::before {
+    content: "❌ ";
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px white, 0 0 10px white;
+        opacity: 0.8;
+    }
+    to {
+        text-shadow: 0 0 15px white, 0 0 30px white;
+        opacity: 1;
+    }
+}
+
+@keyframes popFade {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes glowBox {
+    from {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+    to {
+        box-shadow: 0 0 35px rgba(255, 255, 255, 0.7), 0 0 60px rgba(255, 255, 255, 0.4);
+    }
+}
