@@ -72,7 +72,6 @@ def predict():
             'explanation': result['explanation']
         })
 
-
 @app.route('/logs')
 def view_logs():
     if not os.path.exists(LOG_FILE):
