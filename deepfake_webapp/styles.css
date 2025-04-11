@@ -6,13 +6,15 @@ body {
     font-family: 'Segoe UI', sans-serif;
 }
 
+/* Container overlay */
 .overlay {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 35px;
 }
 
+/* Main Title */
 .title {
-    font-size: 5rem; 
+    font-size: 5rem;
     font-weight: bold;
     color: white;
     text-align: center;
@@ -26,7 +28,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* Upload */
+/* Upload Section */
 .upload-container {
     border: 2px dashed white;
     background-color: rgba(255, 255, 255, 0.2);
@@ -60,6 +62,7 @@ body {
     opacity: 0;
 }
 
+/* Predict Button */
 .btn-predict {
     background-color: rgb(89, 12, 89);
     color: white;
@@ -77,6 +80,7 @@ body {
     transform: scale(1.05);
 }
 
+/* Animations */
 @keyframes fadeScaleIn {
     from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
@@ -88,7 +92,7 @@ body {
     100% { box-shadow: 0 0 10px white, 0 0 20px purple; }
 }
 
-/* Result Boxes */
+/* Result Box */
 .real-background, .fake-background {
     padding: 30px 50px;
     border-radius: 30px;
@@ -117,7 +121,6 @@ body {
 
 .real-background {
     background: linear-gradient(135deg, #00cc66, #004d33);
-    box-shadow: 0 0 30px rgba(0, 255, 128, 0.5);
 }
 .real-flutter::before {
     content: "✅ ";
@@ -125,21 +128,9 @@ body {
 
 .fake-background {
     background: linear-gradient(135deg, #ff0033, #4d0000);
-    box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
 }
 .fake-flutter::before {
     content: "❌ ";
-}
-
-@keyframes glow {
-    from {
-        text-shadow: 0 0 5px white, 0 0 10px white;
-        opacity: 0.8;
-    }
-    to {
-        text-shadow: 0 0 15px white, 0 0 30px white;
-        opacity: 1;
-    }
 }
 
 @keyframes popFade {
@@ -155,9 +146,35 @@ body {
 
 @keyframes glowBox {
     from {
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3), 0 0 25px rgba(255, 255, 255, 0.1);
     }
     to {
-        box-shadow: 0 0 35px rgba(255, 255, 255, 0.7), 0 0 60px rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.6), 0 0 50px rgba(255, 255, 255, 0.3);
     }
+}
+
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(21, 3, 38, 0.85);
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
 }
