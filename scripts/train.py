@@ -43,12 +43,10 @@ val_accuracies = []
 train_losses = []
 val_losses = []
 
-
 # Training loop
 for epoch in range(num_epochs):
     model.train()
     total, correct, loss_total = 0, 0, 0
-
     for faces, labels, _ in tqdm(train_loader, desc=f"Epoch {epoch+1}/{num_epochs}"):
         B, N, C, H, W = faces.size()
         faces = faces.view(B * N, C, H, W).to(device)
@@ -69,7 +67,7 @@ for epoch in range(num_epochs):
     train_losses.append(loss_total/ len(train_loader))
     train_accuracies.append(train_acc)
 
-    # 🔍 Validation
+    # Validation
     model.eval()
     val_correct, val_total, val_loss_total = 0, 0, 0
     with torch.no_grad():
@@ -99,7 +97,7 @@ os.makedirs(os.path.dirname(model_save_path), exist_ok=True)
 torch.save(model.state_dict(), model_save_path)
 print(f"\n✅ Model saved to {model_save_path}")
 
-# 📊 Plotting
+# Plotting
 plt.figure(figsize=(10, 4))
 
 # Accuracy plot
