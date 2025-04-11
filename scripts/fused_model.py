@@ -103,9 +103,15 @@ def predict(video_path, video_model, audio_model):
     if os.path.exists("temp_audio.wav"):
         os.remove("temp_audio.wav")
 
-    fusion_real = 0.7 * video_real_score + 0.3 * audio_real_score
-    fusion_fake = 0.7 * video_fake_score + 0.3 * audio_fake_score
-    predicted_label = "real" if fusion_real > fusion_fake else "fake"
+    #fusion_real = 0.5 * video_real_score + 0.5 * audio_real_score
+    #fusion_fake = 0.5 * video_fake_score + 0.5 * audio_fake_score
+    #predicted_label = "fake" if fusion_real <= fusion_fake else "real"
+
+    # Deepfake means either audio OR video is fake
+    if video_fake_score > video_real_score or audio_fake_score > audio_real_score:
+        predicted_label = "fake"
+    else:
+        predicted_label = "real"
 
     return {
         "predicted_label": predicted_label,
