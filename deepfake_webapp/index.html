@@ -18,7 +18,11 @@
   </div>
 
   <div class="overlay container my-5 p-5 rounded shadow">
-    <h1 class="title text-center mb-5">FakeBuster</h1>
+    <div class="title-wrapper mb-5">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo-img me-3">
+      <h1 class="title mb-0">FakeBuster</h1>
+    </div>
+
 
     <div id="upload-section" class="upload-container p-5 text-center">
       <div class="d-flex justify-content-center align-items-center flex-column flex-md-row gap-3">
@@ -80,13 +84,36 @@
         }
 
         selectedFile = file;
-        const url = URL.createObjectURL(file);
-        videoPreview.src = url;
-        videoPreview.style.display = 'block';
-        videoPreview.style.opacity = '0';
-        videoPreview.offsetHeight; // simpler and clearer
-        videoPreview.style.animation = 'fadeScaleIn 0.8s ease-out forwards';
-        predictBtn.style.display = 'inline-block';
+        // Upload immediately to server to re-encode
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        fetch('/upload_and_reencode', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            const reencodedUrl = data.reencoded_url;
+            videoPreview.src = reencodedUrl;
+            videoPreview.style.display = 'block';
+            videoPreview.style.opacity = '0';
+            videoPreview.offsetHeight; 
+            videoPreview.style.animation = 'fadeScaleIn 0.8s ease-out forwards';
+            predictBtn.style.display = 'inline-block';
+          } else {
+            if (data.error.includes("No audio stream")) {
+                alert("This video does not contain any audio. Please upload a video with an audio stream.");
+            } else {
+                alert("Error during upload/re-encoding: " + data.error);
+            }
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert("An error occurred during upload.");
+        });
       }
     }
 
