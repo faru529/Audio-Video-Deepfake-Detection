@@ -12,6 +12,23 @@ body {
     border-radius: 35px;
 }
 
+.logo-img{
+    height: 6rem; /* Adjust to fit title size */
+    width: auto;
+    animation: fadeScaleIn 0.8s ease-out forwards;
+    border: 3px solid white;
+    border-radius: 20px; /* rounded rectangle */
+    background-color: transparent;
+}
+
+.title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+
 /* Main Title */
 .title {
     font-size: 5rem;
@@ -176,4 +193,9 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
+}
+
+/* Prevent blinking caret/focus on all non-input elements */
+h1, h2, h3, h4, h5, h6, p, span, div, label {
+    caret-color: transparent;
 }
